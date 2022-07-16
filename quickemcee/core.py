@@ -5,9 +5,7 @@ from multiprocessing import Pool
 
 
 class Model:
-    """
-    Build a model object.
-    """
+    """Build a model object."""
 
     def __init__(self, ndim, predict, priors, y_data, y_sigma):
         """
@@ -77,7 +75,6 @@ class Model:
         float
 
         """
-
         # discard diverging simulations
         prediction = self.predict(coords)
         if not np.isfinite(prediction).all():
@@ -100,7 +97,6 @@ class Model:
         float
 
         """
-
         lp = self._log_prior(coords)
 
         if not np.isfinite(lp):
@@ -135,3 +131,42 @@ class Model:
                                             moves=emcee_moves,
                                             pool=pool)
         return sampler
+
+
+def run_mcmc_chain(sampler, burn_iter, main_iter, init_vals=None):
+    """
+    Do.
+
+    Parameters
+    ----------
+    sampler : `emcee` Ensemble Sampler object
+        The `emcee` sampler for which the chain is run.
+    burn_iter : int
+        the number of steps that the chain will do during the burn in
+        phase. The samples produced during burn in phase are discarded.
+    main_iter : int
+        the number of steps that the chain will do during the production
+        phase. The samples produced during production phase are saved in
+        the sampler and can be extracted for later analysis.
+    init_vals : array, optional
+        1D array of length ndim with initial values for the coordinates vector.
+        When set as None uses all zeroes. The default is None.
+
+    """
+    ndim, nwalkers = sampler.ndim, sampler.nwalkers
+    if init_vals is None:
+        init_vals = np.zeros(ndim)
+
+    p0 = [init_vals + 1e-7 * np.random.randn(ndim)
+          for i in range(nwalkers)]
+
+    print("")
+    print("Running burn-in...")
+    p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+    sampler.reset()
+
+    print("")
+    print("Running production...")
+    pos, prob, state = sampler.run_mcmc(p0, main_iter, progress=True)
+
+    # function ends here
