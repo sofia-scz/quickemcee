@@ -267,3 +267,76 @@ def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
 
     axes[-1].set_xlabel("sample number")
     plt.show()
+
+
+def resultplot(flat_samples, y_data, x_data, predf, thindata=1,
+               plotmeans=True, plotmodes=False, plotsamples=0,
+               figsize=None, dpi=100, dotsize=None, linewidth=None):
+    """
+    Plot different simulated results and the data.
+
+    Makes a scatter plot for the data, and makes extra plots on top of it to
+    compare the results with the data.
+
+    It's possible to plot simulations of the results with the means and the
+    modes of the results, and to make shaded plots of simulations using samples
+    from the chain, showing the most likely results as more shaded areas.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    y_data : array
+        Array with the y target data used to fit the model.
+    x_data : array
+        Array with the x values corresponding to the y_data values.
+    predf : callable
+        The prediction function used in sampling. Should take a 1D array of
+        length ndim and return an array of the same shape as y_data.
+    thindata : int, optional
+        Slice the data arrays to drop some data points and get a lighter plot.
+        The default is 1.
+    plotmeans : boolean, optional
+        Plots the predicted results using the mean of the samples. The default
+        is True.
+    plotmodes : boolean, optional
+        Plots the predicted results using the mode(most likely value) of the
+        samples. The default is True.
+    plotsamples : int, optional
+        Number of samples to draw for making the shaded plots. The default is
+        0.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    dotsize : float, optional
+        Marker size for scatter plots. The default is None(uses pyplot
+        default).
+    linewidth : float, optional
+        Line width for regular plots. The default is None(uses pyplot default).
+    """
+    ndim = len(flat_samples[0])
+
+    plt.figure(figsize=figsize, dpi=dpi)
+
+    if plotsamples:
+        permutation = np.random.permutation(plotsamples)
+        auxsamples = [flat_samples[i] for i in permutation]
+        for sample in auxsamples:
+            plt.plot(x_data, predf(sample),
+                     lw=0.7*linewidth, c='black', alpha=0.1)
+
+    plt.scatter(x_data[::thindata], y_data[::thindata],
+                s=dotsize, label='data')
+
+    if plotmeans:
+        means = np.array([np.mean(flat_samples[:, i]) for i in range(ndim)])
+        plt.plot(x_data, predf(means), lw=linewidth, c='tab:red', label='mean')
+
+    if plotmodes:
+        modes = np.array([mode(flat_samples[:, i]) for i in range(ndim)])
+        plt.plot(x_data, predf(modes), lw=linewidth, c='tab:purple',
+                 label='mode')
+    plt.legend()
+    plt.show()
