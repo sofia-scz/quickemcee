@@ -269,7 +269,7 @@ def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
     plt.show()
 
 
-def resultplot(flat_samples, y_data, x_data, predf, thindata=1,
+def resultplot(flat_samples, y_data, x_data, predf,
                plotmeans=True, plotmodes=False, plotsamples=0,
                figsize=None, dpi=100, dotsize=None, linewidth=None):
     """
@@ -293,9 +293,6 @@ def resultplot(flat_samples, y_data, x_data, predf, thindata=1,
     predf : callable
         The prediction function used in sampling. Should take a 1D array of
         length ndim and return an array of the same shape as y_data.
-    thindata : int, optional
-        Slice the data arrays to drop some data points and get a lighter plot.
-        The default is 1.
     plotmeans : boolean, optional
         Plots the predicted results using the mean of the samples. The default
         is True.
@@ -316,27 +313,26 @@ def resultplot(flat_samples, y_data, x_data, predf, thindata=1,
     linewidth : float, optional
         Line width for regular plots. The default is None(uses pyplot default).
     """
-    ndim = len(flat_samples[0])
-
+    ndim, ndata = len(flat_samples[0]), len(y_data)
+    x_aux = np.linspace(x_data.min(), x_data.max(), ndata)
     plt.figure(figsize=figsize, dpi=dpi)
 
     if plotsamples:
         permutation = np.random.permutation(plotsamples)
         auxsamples = [flat_samples[i] for i in permutation]
         for sample in auxsamples:
-            plt.plot(x_data, predf(sample),
+            plt.plot(x_aux, predf(sample),
                      lw=0.7*linewidth, c='black', alpha=0.1)
 
-    plt.scatter(x_data[::thindata], y_data[::thindata],
-                s=dotsize, label='data')
+    plt.scatter(x_data, y_data, s=dotsize, label='data')
 
     if plotmeans:
         means = np.array([np.mean(flat_samples[:, i]) for i in range(ndim)])
-        plt.plot(x_data, predf(means), lw=linewidth, c='tab:red', label='mean')
+        plt.plot(x_aux, predf(means), lw=linewidth, c='tab:red', label='mean')
 
     if plotmodes:
         modes = np.array([mode(flat_samples[:, i]) for i in range(ndim)])
-        plt.plot(x_data, predf(modes), lw=linewidth, c='tab:purple',
+        plt.plot(x_aux, predf(modes), lw=linewidth, c='tab:purple',
                  label='mode')
     plt.legend()
     plt.show()
