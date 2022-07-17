@@ -17,16 +17,19 @@ def mode(data, xmin=None, xmax=None, bw=None, xr_fr=.1):
     Compute the mode of an array of values using a kernel density estimation
     method. The KDE method used is `scipy.stats.gaussian_kde`.
 
-    In multimodal distributions it should return the mode of the highest peak.
+    In multimodal distributions it should return the mode of the highest peak
+    within the cutoff values.
 
     Parameters
     ----------
     data : array
         Array containing the values.
     xmin : float, optional
-        Lower bound for cutting off the values. The default is min(data).
+        Lower bound for cutting off the values. The default is None (uses the
+        minimum of all values).
     xmax : float, optional
-        Upper bound for cutting off the values. The default is max(data).
+        Upper bound for cutting off the values. The default is None (uses the
+        maximum of all values).
     bw : str, scalar or callable, optional
         The method used to calculate the estimator bandwidth when calling
         `scipy.stats.gaussian_kde`. The default is None (uses the default
@@ -59,20 +62,24 @@ def mode(data, xmin=None, xmax=None, bw=None, xr_fr=.1):
 
 
 class uniform_prior:
-    """
+    r"""
     Define uniform PDF callable.
 
     Defines a probability distribution object. An instance of this class can be
     called to compute the probability density of a float, and it only takes the
     float as argument.
 
-    The uniform prior distribution is defined as in the usual mathematical
-    convention and is given normalized.
+    The uniform prior distribution is defined as
+
+    $$p(x) = \frac{1}{m_{max}-m_{min}} \quad\text{if}\quad m_{min}<x<m_{max} \\
+        0 \quad\text{otherwise}$$
+
+    and is given normalized.
     """
 
     def __init__(self, xmin, xmax):
         """
-        Initialice the instance.
+        Initialice an instance.
 
         Parameters
         ----------
@@ -102,20 +109,26 @@ class uniform_prior:
 
 
 class normal_prior:
-    """
+    r"""
     Define normal PDF callable.
 
     Define a probability distribution object. An instance of this class can be
     called to compute the probability density of a float, and it only takes the
     float as argument.
 
-    The normal (aka Gaussian) prior distribution is defined as in the usual
-    mathematical convention and is given normalized.
+    The normal (aka Gaussian) prior distribution is defined as
+
+    $$p(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp{
+        \left\{ -\frac{1}{2} \left( \frac{x-x_0}{\sigma} \right)^2
+            \right\}
+        }$$
+
+    and is given normalized.
     """
 
     def __init__(self, x0, sigma):
         """
-        Initialice the instance.
+        Initialice an instance.
 
         Parameters
         ----------
@@ -178,7 +191,7 @@ def cornerplots(flat_samples, labels_list):
     plt.show()
 
 
-def traceplots(samples, labels_list):
+def traceplots(samples, labels_list, figsize=None, dpi=100):
     """
     Make traceplots for each parameter of a given sample.
 
@@ -194,9 +207,14 @@ def traceplots(samples, labels_list):
         non flattened array of samples.
     labels_list : list
         list with a label(str) for each parameter of the samples.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
     """
     dim = len(labels_list)
-    fig, axes = plt.subplots(dim, figsize=(10, 7), dpi=100, sharex=True)
+    fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
     plt.suptitle("parameter traces")
     for i in range(dim):
         ax = axes[i]
@@ -209,7 +227,7 @@ def traceplots(samples, labels_list):
     plt.show()
 
 
-def autocplots(flat_samples, labels_list):
+def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
     """
     Plot autocorrelation function for each parameter.
 
@@ -228,13 +246,18 @@ def autocplots(flat_samples, labels_list):
         flattened array of samples.
     labels_list : list
         list with a label(str) for each parameter of the samples.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
     """
     dim, clen = len(labels_list), len(flat_samples)
     step_slice = clen // 100
     aux_dom = range(0, clen, step_slice)
     aux_fl = flat_samples[::step_slice]
     autocfs = np.array([function_1d(aux_fl[:, _]) for _ in range(dim)])
-    fig, axes = plt.subplots(dim, figsize=(10, 7), dpi=100, sharex=True)
+    fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
     plt.suptitle("autocorrelation functions")
     for i in range(dim):
         ax = axes[i]
