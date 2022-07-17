@@ -105,76 +105,77 @@ class qmcModel:
 
         return lp + self._log_likelihood(coords)
 
-    def setup_emcee_sampler(self, nwalkers, cpu_cores=1, emcee_moves=None):
+    def qmc_run_chain(self, nwalkers, burn_iter, main_iter,
+                      init_vals=None, moves=None, workers=1):
         """
-        Set up the `emcee` Sampler object.
-
-        See `emcee` docs for more details.
+        Instance an `emcee` Ensemble Sambler and run an MCMC chain with it.
 
         Parameters
         ----------
         nwalkers : int
             number of walkers.
-        cpu_cores : int, optional
-            number of CPU cores to be used by the sampler. The default is 1.
-        emcee_moves : emcee moves object, optional
+        burn_iter : int
+            the number of steps that the chain will do during the burn in
+            phase. The samples produced during burn in phase are discarded.
+        main_iter : int
+            the number of steps that the chain will do during the production
+            phase. The samples produced during production phase are saved in
+            the sampler and can be extracted for later analysis.
+        init_vals : array, optional
+            1D array of length ndim with initial values for the coordinates
+            vector. When set as None uses all zeroes. The default is None.
+        moves : emcee moves object, optional
             `emcee` moves object. The default is None.
+        workers : int, optional
+            Parallelize the computing by setting up a pool of workers of size
+            workers. The default is 1.
 
         Returns
         -------
         sampler : emcee Ensemble Sampler object
+            The instanced `emcee` sampler for which the chain is run.
 
         """
-        if cpu_cores == 1:
+        ndim = self.ndim
+
+        if init_vals is None:
+            init_vals = np.zeros(ndim)
+
+        p0 = [init_vals + 1e-7 * np.random.randn(ndim)
+              for i in range(nwalkers)]
+
+        if workers == 1:
             sampler = emcee.EnsembleSampler(nwalkers,
-                                            self.ndim,
+                                            ndim,
                                             self._log_probability,
-                                            moves=emcee_moves)
+                                            moves=moves)
+            print("")
+            print("Running burn-in...")
+            p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+            sampler.reset()
 
-        elif cpu_cores > 1:
-            with Pool(processes=cpu_cores) as pool:
+            print("")
+            print("Running production...")
+            pos, prob, state = sampler.run_mcmc(p0, main_iter, progress=True)
+
+            return sampler
+
+        elif workers > 1:
+            with Pool(processes=workers) as pool:
                 sampler = emcee.EnsembleSampler(nwalkers,
-                                                self.ndim,
+                                                ndim,
                                                 self._log_probability,
-                                                moves=emcee_moves,
+                                                moves=moves,
                                                 pool=pool)
-        return sampler
+                print("")
+                print("Running burn-in...")
+                p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+                sampler.reset()
 
-
-def run_mcmc_chain(sampler, burn_iter, main_iter, init_vals=None):
-    """
-    Run an MCMC chain for an input `emcee` Ensemble Sampler.
-
-    Parameters
-    ----------
-    sampler : emcee Ensemble Sampler object
-        The `emcee` sampler for which the chain is run.
-    burn_iter : int
-        the number of steps that the chain will do during the burn in
-        phase. The samples produced during burn in phase are discarded.
-    main_iter : int
-        the number of steps that the chain will do during the production
-        phase. The samples produced during production phase are saved in
-        the sampler and can be extracted for later analysis.
-    init_vals : array, optional
-        1D array of length ndim with initial values for the coordinates vector.
-        When set as None uses all zeroes. The default is None.
-
-    """
-    ndim, nwalkers = sampler.ndim, sampler.nwalkers
-    if init_vals is None:
-        init_vals = np.zeros(ndim)
-
-    p0 = [init_vals + 1e-7 * np.random.randn(ndim)
-          for i in range(nwalkers)]
-
-    print("")
-    print("Running burn-in...")
-    p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
-    sampler.reset()
-
-    print("")
-    print("Running production...")
-    pos, prob, state = sampler.run_mcmc(p0, main_iter, progress=True)
-
-    # function ends here
+                print("")
+                print("Running production...")
+                pos, prob, state = sampler.run_mcmc(p0, main_iter,
+                                                    progress=True)
+                pool.close()
+            # outside with-as
+            return sampler
