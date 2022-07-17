@@ -9,7 +9,7 @@ setuptools.setup(
 	   version='0.0.1a0',
 	   description=('quickemcee is a library developed to sum up '
 		        'scripts using the emcee library to quickly set up '
-		        'MCMC analysis, and includes some QOL features.'),
+		        'MCMC analysis. It includes some QOL features.'),
 	   long_description=long_description,
 	   long_description_content_type="text/markdown",
 	   url='https://github.com/sofia-scz/quick-emcee/',
