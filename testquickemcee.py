@@ -25,9 +25,9 @@ priors = [quickemcee.utils.uniform_prior(0, 5),
 
 model = quickemcee.core.qmcModel(2, predict, priors, y_data, .1)
 
-sampler = model.setup_emcee_sampler(30)
+sampler = model.setup_emcee_sampler(nwalkers=50)
 
-quickemcee.core.run_mcmc_chain(sampler, 200, 200)
+quickemcee.core.run_mcmc_chain(sampler, 300, 1000)
 
 samples, flat_samples = sampler.get_chain(), sampler.get_chain(flat=True)
 
