@@ -125,12 +125,19 @@ class qmcModel:
         sampler : emcee Ensemble Sampler object
 
         """
-        with Pool(processes=cpu_cores) as pool:
+        if cpu_cores == 1:
             sampler = emcee.EnsembleSampler(nwalkers,
                                             self.ndim,
                                             self._log_probability,
-                                            moves=emcee_moves,
-                                            pool=pool)
+                                            moves=emcee_moves)
+
+        elif cpu_cores > 1:
+            with Pool(processes=cpu_cores) as pool:
+                sampler = emcee.EnsembleSampler(nwalkers,
+                                                self.ndim,
+                                                self._log_probability,
+                                                moves=emcee_moves,
+                                                pool=pool)
         return sampler
 
 
