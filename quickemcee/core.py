@@ -1,15 +1,16 @@
 """Main file with the core scripts."""
+
 import numpy as np
 import emcee
 from multiprocessing import Pool
 
 
-class Model:
+class qmcModel:
     """Build a model object."""
 
     def __init__(self, ndim, predict, priors, y_data, y_sigma):
         """
-        Init an instance of Model.
+        Initialize an instance.
 
         Parameters
         ----------
@@ -116,12 +117,12 @@ class Model:
             number of walkers.
         cpu_cores : int, optional
             number of CPU cores to be used by the sampler. The default is 1.
-        emcee_moves : TYPE, optional
+        emcee_moves : emcee moves object, optional
             `emcee` moves object. The default is None.
 
         Returns
         -------
-        sampler : `emcee` Ensemble Sampler object
+        sampler : emcee Ensemble Sampler object
 
         """
         with Pool(processes=cpu_cores) as pool:
@@ -135,11 +136,11 @@ class Model:
 
 def run_mcmc_chain(sampler, burn_iter, main_iter, init_vals=None):
     """
-    Do.
+    Run an MCMC chain for an input `emcee` Ensemble Sampler.
 
     Parameters
     ----------
-    sampler : `emcee` Ensemble Sampler object
+    sampler : emcee Ensemble Sampler object
         The `emcee` sampler for which the chain is run.
     burn_iter : int
         the number of steps that the chain will do during the burn in
