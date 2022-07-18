@@ -43,4 +43,4 @@ quickemcee.utils.autocplots(flat_samples, labels)
 quickemcee.utils.resultplot(flat_samples, y_data, x_data, predict,
                             plotmeans=False, plotsamples=100,
                             dotsize=2.0, linewidth=1.7,
-                            figsize=(7,5))
+                            figsize=(7, 5))
