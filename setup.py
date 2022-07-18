@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
 	   name='quickemcee',
 	   packages=['quickemcee'],
-	   version='0.0.1a0',
+	   version='0.0.1a1',
 	   description=('quickemcee is a library developed to sum up '
 		        'scripts using the emcee library to quickly set up '
 		        'MCMC analysis. It includes some QOL features.'),
