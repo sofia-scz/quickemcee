@@ -8,14 +8,7 @@ np.random.seed(335)
 x_data = np.linspace(0, 1, ndata) + np.random.uniform(
                                             -.1/ndata, .1/ndata, ndata)
 
-
-def f(x, m, h):
-    """Compute y(x)=m*x+h."""
-    return m * x + h
-
-
-y_data = np.array([f(x, .5, 1) + np.random.normal(0, .1) for x in x_data])
-
+y_data = .5 * x_data + 1.0
 
 def predict(coords):
     """Compute model prediction for a vector in params spaces."""
