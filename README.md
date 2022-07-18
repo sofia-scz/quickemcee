@@ -1,6 +1,10 @@
 # quickemcee
 A Python library to quickly set up MCMC scripts based on the `emcee` package. Includes functions and classes to quickly set up `emcee` objects, run MCMC, and analyze the results with minumum effort from the end user. 
 
+# Github pages
+
+Visit quickemcee's Github pages on https://sofia-scz.github.io/quickemcee/. There you can find documentation, worked examples, and other information. 
+
 # Installation
 
 ```
