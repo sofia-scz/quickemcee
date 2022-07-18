@@ -31,7 +31,7 @@ priors = [quickemcee.utils.uniform_prior(0, 5),
 model = quickemcee.core.Model(2, predict, priors, y_data, .1)
 
 sampler = model.run_chain(nwalkers=100, burn_iter=200, main_iter=500,
-                          init_vals=[.1, .1], workers=10)
+                          init_x=[.1, .1], workers=10)
 
 samples, flat_samples = sampler.get_chain(), sampler.get_chain(flat=True)
 
