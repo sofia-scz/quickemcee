@@ -28,10 +28,10 @@ priors = [quickemcee.utils.uniform_prior(0, 5),
           quickemcee.utils.uniform_prior(0, 5)
           ]
 
-model = quickemcee.core.qmcModel(2, predict, priors, y_data, .1)
+model = quickemcee.core.Model(2, predict, priors, y_data, .1)
 
-sampler = model.qmc_run_chain(nwalkers=100, burn_iter=200, main_iter=500,
-                              init_vals=[.1, .1], workers=10)
+sampler = model.run_chain(nwalkers=100, burn_iter=200, main_iter=500,
+                          init_x=[.1, .1], workers=10)
 
 samples, flat_samples = sampler.get_chain(), sampler.get_chain(flat=True)
 
@@ -43,4 +43,4 @@ quickemcee.utils.autocplots(flat_samples, labels)
 quickemcee.utils.resultplot(flat_samples, y_data, x_data, predict,
                             plotmeans=False, plotsamples=100,
                             dotsize=2.0, linewidth=1.7,
-                            figsize=(7,5))
+                            figsize=(7, 5))
