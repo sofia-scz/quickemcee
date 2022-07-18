@@ -13,7 +13,7 @@ y_data = .5 * x_data + 1.0 + np.random.normal(0, .1, ndata)
 def predict(coords):
     """Compute model prediction for a vector in params spaces."""
     m, h = coords
-    sleep(0.0002)
+    sleep(0.0002) # add sleep time to test multiprocessing
     return m * x_data + h
 
 
@@ -34,6 +34,6 @@ quickemcee.utils.traceplots(samples, labels)
 quickemcee.utils.cornerplots(flat_samples, labels)
 quickemcee.utils.autocplots(flat_samples, labels)
 quickemcee.utils.resultplot(flat_samples, y_data, x_data, predict,
-                            plotmeans=False, plotsamples=100,
+                            plotsamples=100,
                             dotsize=2.0, linewidth=1.7,
                             figsize=(7, 5))
