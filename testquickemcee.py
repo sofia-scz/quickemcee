@@ -13,7 +13,7 @@ y_data = .5 * x_data + 1.0
 def predict(coords):
     """Compute model prediction for a vector in params spaces."""
     m, h = coords
-    sleep(0.0005)
+    sleep(0.0002)
     return m * x_data + h
 
 
@@ -24,7 +24,7 @@ priors = [quickemcee.utils.uniform_prior(0, 5),
 model = quickemcee.core.Model(2, predict, priors, y_data, .1)
 
 sampler = model.run_chain(nwalkers=100, burn_iter=200, main_iter=500,
-                          init_x=[.1, .1], workers=10)
+                          init_x=[.1, .1], workers=2)
 
 samples, flat_samples = sampler.get_chain(), sampler.get_chain(flat=True)
 
