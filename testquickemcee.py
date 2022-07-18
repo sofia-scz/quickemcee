@@ -18,8 +18,7 @@ def predict(coords):
 
 
 priors = [quickemcee.utils.uniform_prior(0, 5),
-          quickemcee.utils.uniform_prior(0, 5)
-          ]
+          quickemcee.utils.uniform_prior(0, 5)]
 
 model = quickemcee.core.Model(2, predict, priors, y_data, .1)
 
