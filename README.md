@@ -25,6 +25,6 @@ Recommended BibTex citation
   year         = 2022,
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.6857842},
-  url          = {https://doi.org/10.5281/zenodo.6857843}
+  url          = {https://doi.org/10.5281/zenodo.6857842}
 }
 ```
