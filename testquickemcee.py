@@ -21,7 +21,7 @@ def predict(coords):
     """Compute model prediction for a vector in params spaces."""
     m, h = coords
     sleep(0.0005)
-    return np.array([f(x, m, h) for x in x_data])
+    return m * x_data + h
 
 
 priors = [quickemcee.utils.uniform_prior(0, 5),
