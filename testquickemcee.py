@@ -8,7 +8,7 @@ np.random.seed(335)
 x_data = np.linspace(0, 1, ndata) + np.random.uniform(
                                             -.1/ndata, .1/ndata, ndata)
 
-y_data = .5 * x_data + 1.0
+y_data = .5 * x_data + 1.0 + np.random.normal(0, .1, ndata)
 
 def predict(coords):
     """Compute model prediction for a vector in params spaces."""
