@@ -13,7 +13,7 @@ pip install quickemcee
 
 ## Referencing this work
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6857843.svg)](https://doi.org/10.5281/zenodo.6857843)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6857842.svg)](https://doi.org/10.5281/zenodo.6857842)
 
 Recommended BibTex citation
 
@@ -24,8 +24,7 @@ Recommended BibTex citation
   month        = jul,
   year         = 2022,
   publisher    = {Zenodo},
-  version      = {v0.0.1a1},
-  doi          = {10.5281/zenodo.6857843},
+  doi          = {10.5281/zenodo.6857842},
   url          = {https://doi.org/10.5281/zenodo.6857843}
 }
 ```
