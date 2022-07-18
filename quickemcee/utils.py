@@ -344,17 +344,17 @@ def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
 
     if plotmean:
         means = np.array([np.mean(flat_samples[:, i]) for i in range(ndim)])
-        plt.plot(x_aux, predf(means), lw=linewidth, c='tab:red', label='mean')
+        plt.plot(x_aux, predf(means), lw=linewidth, c='tab:purple', label='mean')
 
     if plotmedian:
         medians = np.array([np.median(flat_samples[:, i])
                             for i in range(ndim)])
         plt.plot(x_aux, predf(medians), lw=linewidth,
-                 c='tab:red', label='mean')
+                 c='tab:green', label='median')
 
     if plotmode:
         modes = np.array([mode(flat_samples[:, i]) for i in range(ndim)])
-        plt.plot(x_aux, predf(modes), lw=linewidth, c='tab:purple',
+        plt.plot(x_aux, predf(modes), lw=linewidth, c='tab:orange',
                  label='mode')
     plt.legend()
     plt.show()
