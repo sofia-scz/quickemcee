@@ -6,11 +6,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
 	   name='quickemcee',
 	   packages=['quickemcee'],
-	   version='0.0.1a2',
+	   version='0.0.1a3',
 	   description=('quickemcee is a library with built in scripts'
 		        'using the emcee library to quickly set up '
-			'MCMC analysis. It also includes utilities to '
-		        'process the results.'),
+			'MCMC analysis.'),
 	   long_description=long_description,
 	   long_description_content_type="text/markdown",
 	   url='https://github.com/sofia-scz/quick-emcee/',
