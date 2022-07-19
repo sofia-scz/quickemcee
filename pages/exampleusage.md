@@ -158,6 +158,10 @@ Now we run the chain with
 ```
 sampler = mymodel.run_chain(nwalkers=nwalkers, burn_iter=burn_iter,
                             main_iter=main_iter, init_x=init_x)
+
+```
+
+```
 >>>Running burn-in...
 >>>100%|██████████| 50/50 [00:00<00:00, 330.99it/s]
 >>>Running production...
