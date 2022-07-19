@@ -62,8 +62,9 @@ In general what we do is to take a look at the raw data and try to infer from it
 
 And then the normalized(the integral over all the posible values must return 1) priors that express this previous knowledge are
 
-1.   $p(m) = \begin{cases} 1/M \quad & \text{if } 0<m<M \\ 0 & \text{otherwise} \end{cases}$
-2.   $p(x) = \frac{1}{0.5\sqrt{2\pi}}\exp{\left[-\frac{1}{2}\left(\frac{x-5}{0.5}\right)^2\right]}$
+1.   $$p(m) = \begin{cases} 1/M \quad & \text{if } 0<m<M \\
+2.                                 0 & \text{otherwise} \end{cases}$$
+3.   $p(x) = \frac{1}{0.5\sqrt{2\pi}}\exp{\left[-\frac{1}{2}\left(\frac{x-5}{0.5}\right)^2\right]}$
 
 Specifically for our model we need to define priors for $m$ and $h$. From the data points plot we see
 
