@@ -1,6 +1,6 @@
 ---
 layout: sidepage
-permalink: /example-usage/
+permalink: /line-example/
 ---
 
 An interactive version of this notebook is available at [this Google Colab link](https://colab.research.google.com/drive/1iTPRObgjIBqbWDLrcotOrIIOvBIJySdi?usp=sharing).
