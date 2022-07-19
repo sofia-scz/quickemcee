@@ -16,6 +16,7 @@ https://doi.org/10.1103/revmodphys.83.943
 
 * The official [emcee documentation](https://emcee.readthedocs.io/en/stable/).
 * Pasha, I. MCMC: A (very) begginer's guide. [Github tutorials link](https://prappleizer.github.io/Tutorials/MCMC/MCMC_Tutorial.html)
+* Wouter Deconinck, William & Mary. Implementations for problems in "Data analysis recipes: Fitting a model to data". [Github repo link](https://github.com/wdconinc/data-analysis-recipes-fitting-a-model-to-data)
 
 ## Other useful libraries
 
