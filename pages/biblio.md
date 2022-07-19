@@ -10,6 +10,8 @@ Keep in mind that this is a work in progress and the list must me enhanced.
 * von Toussaint, U. (2011). Bayesian inference in physics. Reviews of Modern Physics (Vol. 83, Issue 3, pp. 943–999). American Physical Society (APS). 
 https://doi.org/10.1103/revmodphys.83.943
 
+* Hogg, D. W., Bovy, J., & Lang, D. (2010). Data analysis recipes: Fitting a model to data. arXiv. https://doi.org/10.48550/ARXIV.1008.4686 
+
 ## MCMC Implementation
 
 * The official [emcee documentation](https://emcee.readthedocs.io/en/stable/).
