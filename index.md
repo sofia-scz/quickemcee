@@ -2,36 +2,36 @@
 layout: homepage
 ---
 
-# Welcome to my custom minimal theme Github pages!
+# Welcome to quickemcee's site
 
-You can find links in the sidebar. 
+## About
 
-The 'instructions' link goes to a short messy list of instructions to modify this theme.
+A Python library to quickly set up MCMC scripts based on the `emcee` package. Includes functions and classes to quickly set up `emcee` objects, run MCMC, and analyze the results with minimum effort from the end user. 
 
-The 'example page' link is the example page that comes with default gh pages thems. 
+## Installation
 
-## Additions/changes
+```
+pip install quickemcee
+```
 
-* Added examples of building API docs and adding them to Github pages
-* Modified the css to be able to fit 80 characters length code in the body of each page, doesn't break
-rendering in neither 1080 nor 720 px screens, and works on both Mozilla and Chrome.
-* Changed the sidebar link to provide access to the API, the source code on Github, and a DOI link such
-as a Zenodo DOI or an article presenting the code.
+### Test installation
 
-## Sources
+`quickemcee` should work out of the box, but there is a script in the Github repo called 'testquickemcee.py' to run in case you want to test the installation. If everything is OK the console should print two progress bars, and then display four images, after the computations are over.
 
-### Base
+## Referencing this work
 
-Original theme is from https://github.com/pages-themes/minimal
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6857842.svg)](https://doi.org/10.5281/zenodo.6857842)
 
-### API documentations
+Recommended BibTex citation
 
-API docs are generated with https://pdoc3.github.io/pdoc/ from the docstrings in the package. 
-
-### Example package
-
-The XX package was used to build example API documentation.
-
-### Table of contents
-
-The table of contents was taken from https://github.com/allejo/jekyll-toc.
+```
+@software{quickemcee,
+  author       = {Scozziero, Sofia Anna},
+  title        = {quickemcee: simple prebuilt MCMC scripts},
+  month        = jul,
+  year         = 2022,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.6857842},
+  url          = {https://doi.org/10.5281/zenodo.6857842}
+}
+```
