@@ -20,7 +20,7 @@ def predict(coords):
 priors = [quickemcee.utils.uniform_prior(0, 5),
           quickemcee.utils.uniform_prior(0, 5)]
 
-model = quickemcee.core.Model(2, predict, priors, y_data, .1)
+model = quickemcee.core.PFModel(2, predict, priors, y_data, .1)
 
 sampler = model.run_chain(nwalkers=100, burn_iter=200, main_iter=500,
                           init_x=[.1, .1], workers=2)
