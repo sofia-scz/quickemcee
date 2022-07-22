@@ -6,7 +6,7 @@ from multiprocessing import Pool
 
 
 class Model:
-    """Build a model object."""
+    """Build a model object from the prediction function and the data."""
 
     def __init__(self, ndim, predict, priors, y_data, y_sigma):
         """
