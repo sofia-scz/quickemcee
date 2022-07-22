@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>quickemcee.utils API documentation</title>
+<meta name="description" content="Submodule with utilities/auxiliary scripts." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>quickemcee.utils</code></h1>
+</header>
+<section id="section-intro">
+<p>Submodule with utilities/auxiliary scripts.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Submodule with utilities/auxiliary scripts.&#34;&#34;&#34;
+
+import numpy as np
+from math import sqrt
+import matplotlib.pyplot as plt
+import corner
+from emcee.autocorr import function_1d
+from scipy.stats import gaussian_kde
+
+
+#                           Aux functions
+
+def mode(data, xmin=None, xmax=None, bw=None, xr_fr=.1):
+    &#34;&#34;&#34;
+    Compute the mode of a 1D array of numerical values.
+
+    Compute the mode of an array of values using a kernel density estimation
+    method. The KDE method used is `scipy.stats.gaussian_kde`.
+
+    In multimodal distributions it should return the mode of the highest peak
+    within the cutoff values.
+
+    Parameters
+    ----------
+    data : array
+        Array containing the values.
+    xmin : float, optional
+        Lower bound for cutting off the values. The default is None (uses the
+        minimum of all values).
+    xmax : float, optional
+        Upper bound for cutting off the values. The default is None (uses the
+        maximum of all values).
+    bw : str, scalar or callable, optional
+        The method used to calculate the estimator bandwidth when calling
+        `scipy.stats.gaussian_kde`. The default is None (uses the default
+        method). See `scipy` docs for more info.
+    xr_fr : float, optional
+        Parameter used to define the KDE grid. The default is .1.
+
+    Returns
+    -------
+    float
+        Value of the mode.
+    &#34;&#34;&#34;
+    if xmin is None:
+        xmin = np.min(data)
+    if xmax is None:
+        xmax = np.max(data)
+    # Define KDE limits.
+    x_rang = xr_fr * (xmax - xmin)
+    kde_x = np.mgrid[xmin - x_rang:xmax + x_rang:1000j]
+    try:
+        kernel_cl = gaussian_kde(data, bw_method=bw)
+        kde = np.reshape(kernel_cl(kde_x).T, kde_x.shape)
+    except np.linalg.LinAlgError:
+        kde = np.array([])
+
+    return kde_x[np.argmax(kde)]
+
+
+#                                   PRIOR CLASSES
+
+
+class uniform_prior:
+    r&#34;&#34;&#34;
+    Define uniform PDF callable.
+
+    Defines a probability distribution object. An instance of this class can be
+    called to compute the probability density of a float, and it only takes the
+    float as argument.
+
+    The uniform prior distribution is defined as
+
+    $$p(x) = \frac{1}{x_{max}-x_{min}} \quad\text{if}\quad x_{min}&lt;x&lt;x_{max} \\
+        0 \qquad\qquad\text{otherwise}$$
+
+    and is given normalized.
+    &#34;&#34;&#34;
+
+    def __init__(self, xmin, xmax):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        xmin : float
+            lower bound of the uniform distribution.
+        xmax : float
+            upper bound of the uniform distribution.
+
+        Examples
+        --------
+            f = quickemcee.utils.uniform_prior(0,4)
+            f(3.0)
+            &gt;&gt;&gt; 0.25
+            f(-1.0)
+            &gt;&gt;&gt; 0.0
+        &#34;&#34;&#34;
+        self.xmin = xmin
+        self.xmax = xmax
+
+    def __call__(self, x):
+        &#34;&#34;&#34;
+        Compute the probability of a real valued variable.
+
+        Parameters
+        ----------
+        x : float
+
+        Returns
+        -------
+        float
+            p(x) as per the mathematical definition of the PDF.
+        &#34;&#34;&#34;
+        p = 1 if x &lt; self.xmax and x &gt; self.xmin else 0
+        return p / (self.xmax - self.xmin)
+
+
+class normal_prior:
+    r&#34;&#34;&#34;
+    Define normal PDF callable.
+
+    Define a probability distribution object. An instance of this class can be
+    called to compute the probability density of a float, and it only takes the
+    float as argument.
+
+    The normal (aka Gaussian) prior distribution is defined as
+
+    $$p(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp{
+        \left\{ -\frac{1}{2} \left( \frac{x-x_0}{\sigma} \right)^2
+            \right\}
+        }$$
+
+    and is given normalized.
+    &#34;&#34;&#34;
+
+    def __init__(self, x0, sigma):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        x0 : float
+            central value of the normal distribution.
+        sigma : float
+            standard deviation of the normal distribution.
+        &#34;&#34;&#34;
+        self.x0 = x0
+        self.sigma = sigma
+
+    def __call__(self, x):
+        &#34;&#34;&#34;
+        Compute the probability of a real valued variable.
+
+        Parameters
+        ----------
+        x : float
+
+        Returns
+        -------
+        float
+            p(x) as per the mathematical definition of the PDF.
+        &#34;&#34;&#34;
+        p = (np.exp(-0.5 * ((x - self.x0) / self.sigma) ** 2)) / sqrt(
+            2 * np.pi) / self.sigma
+        return p
+
+
+#                                   PLOTTING
+
+
+def cornerplots(flat_samples, labels_list):
+    &#34;&#34;&#34;
+    Make cornerplots for a given sample.
+
+    Cornerplots give the 1D histogram for each parameter, and a 2D histogram
+    for each pair of parameters, using the posterior distribution for each
+    parameter. Used to display the main results and analyze correlations.
+
+    The middle red line on each PDF marks the median, which is also the central
+    value reported above the plot. The dashed grey lines mark the 16/84 and
+    84/16 quantiles, which indicate the SD in a normal distribution.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    labels_list : list
+        list with a string for each parameter.
+    &#34;&#34;&#34;
+    dim = len(labels_list)
+    sample_medians = [np.median(flat_samples[:, _]) for _ in range(dim)]
+
+    corner.corner(
+        flat_samples,
+        labels=labels_list,
+        quantiles=(0.16, 0.84),
+        show_titles=True,
+        title_fmt=&#34;.3g&#34;,
+        truths=sample_medians,
+        truth_color=&#34;tab:red&#34;,
+    )
+    plt.show()
+
+
+def traceplots(samples, labels_list, figsize=None, dpi=100):
+    &#34;&#34;&#34;
+    Make a trace plot for each parameter of a given sample.
+
+    A trace plot shows the evolution of each walker for a parameter during an
+    MCMC run. This is used in analyzing the convergence of an MCMC chain, or
+    to diagnose problems when a chain is not converging.
+
+    Notice that for this plot the samples array is not given flattened.
+
+    Parameters
+    ----------
+    samples : array
+        non flattened array of samples.
+    labels_list : list
+        list with a string for each parameter.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    &#34;&#34;&#34;
+    dim = len(labels_list)
+    fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
+    plt.suptitle(&#34;parameter traces&#34;)
+    for i in range(dim):
+        ax = axes[i]
+        ax.plot(samples[:, :, i], &#34;k&#34;, alpha=0.3)
+        ax.set_xlim(0, len(samples))
+        ax.set_ylabel(labels_list[i])
+        ax.yaxis.set_label_coords(-0.1, 0.5)
+
+    axes[-1].set_xlabel(&#34;step number&#34;)
+    plt.show()
+
+
+def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
+    &#34;&#34;&#34;
+    Plot the autocorrelation function for each parameter of a given sample.
+
+    Plot the autocorrelation function for each parameter of a given sample. The
+    function is computed with `emcee.autocorr.function_1d`. It is used to asses
+    the convergence of an MCMC chain.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    labels_list : list
+        list with a label(str) for each parameter of the samples.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    &#34;&#34;&#34;
+    dim, clen = len(labels_list), len(flat_samples)
+    step_slice = clen // 100
+    aux_dom = range(0, clen, step_slice)
+    aux_fl = flat_samples[::step_slice]
+    autocfs = np.array([function_1d(aux_fl[:, _]) for _ in range(dim)])
+    fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
+    plt.suptitle(&#34;autocorrelation functions&#34;)
+    for i in range(dim):
+        ax = axes[i]
+        ax.stem(aux_dom, autocfs[i, :], markerfmt=&#34;&#34;)
+        ax.set_ylabel(labels_list[i])
+        ax.yaxis.set_label_coords(-0.1, 0.5)
+
+    axes[-1].set_xlabel(&#34;sample number&#34;)
+    plt.show()
+
+
+def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
+               plotmedian=False, plotmode=False, plotsamples=0,
+               figsize=None, dpi=100, dotsize=None, linewidth=None):
+    &#34;&#34;&#34;
+    Plot different simulated results and the data.
+
+    Makes a scatter plot for the data, and makes extra plots on top of it to
+    compare the results with the data.
+
+    It&#39;s possible to plot simulations of the results with the means and the
+    modes of the results, and to make shaded plots of simulations using samples
+    from the chain, showing the most likely results as more shaded areas.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    y_data : array
+        Array with the y target data used to fit the model.
+    x_data : array
+        Array with the x values corresponding to the y_data values.
+    predf : callable
+        The prediction function used in sampling. Should take a 1D array of
+        length ndim and return an array of the same shape as y_data.
+    plotmean : boolean, optional
+        Plots the predicted results using the mean of the samples. The default
+        is False.
+    plotmedian : boolean, optional
+        Plots the predicted results using the median(50/50 quantile) of the
+        samples. The default is False.
+    plotmode : boolean, optional
+        Plots the predicted results using the mode(most likely value) of the
+        samples. The default is False.
+    plotsamples : int, optional
+        Number of samples to draw for making the shaded plots. The default is
+        0.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    dotsize : float, optional
+        Marker size for scatter plots. The default is None(uses pyplot
+        default).
+    linewidth : float, optional
+        Line width for line plots. The default is None(uses pyplot default).
+    &#34;&#34;&#34;
+    ndim, ndata = len(flat_samples[0]), len(y_data)
+    x_aux = np.linspace(x_data.min(), x_data.max(), ndata)
+    plt.figure(figsize=figsize, dpi=dpi)
+
+    if linewidth is None or not plotsamples:
+        shaded_lw = None
+    elif plotsamples:
+        try:
+            shaded_lw = 0.7 * linewidth
+        except ValueError:
+            shaded_lw = None
+    else:
+        shaded_lw = None
+
+    if plotsamples:
+        permutation = np.random.permutation(plotsamples)
+        auxsamples = [flat_samples[i] for i in permutation]
+        for sample in auxsamples:
+            plt.plot(x_aux, predf(sample),
+                     lw=shaded_lw, c=&#39;black&#39;, alpha=0.1)
+
+    plt.scatter(x_data, y_data, s=dotsize, label=&#39;data&#39;)
+
+    if plotmean:
+        means = np.array([np.mean(flat_samples[:, i]) for i in range(ndim)])
+        plt.plot(x_aux, predf(means), lw=linewidth, c=&#39;tab:purple&#39;, label=&#39;mean&#39;)
+
+    if plotmedian:
+        medians = np.array([np.median(flat_samples[:, i])
+                            for i in range(ndim)])
+        plt.plot(x_aux, predf(medians), lw=linewidth,
+                 c=&#39;tab:green&#39;, label=&#39;median&#39;)
+
+    if plotmode:
+        modes = np.array([mode(flat_samples[:, i]) for i in range(ndim)])
+        plt.plot(x_aux, predf(modes), lw=linewidth, c=&#39;tab:orange&#39;,
+                 label=&#39;mode&#39;)
+    plt.legend()
+    plt.show()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="quickemcee.utils.autocplots"><code class="name flex">
+<span>def <span class="ident">autocplots</span></span>(<span>flat_samples, labels_list, figsize=None, dpi=100)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the autocorrelation function for each parameter of a given sample.</p>
+<p>Plot the autocorrelation function for each parameter of a given sample. The
+function is computed with <code>emcee.autocorr.function_1d</code>. It is used to asses
+the convergence of an MCMC chain.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>flat_samples</code></strong> :&ensp;<code>array</code></dt>
+<dd>flattened array of samples.</dd>
+<dt><strong><code>labels_list</code></strong> :&ensp;<code>list</code></dt>
+<dd>list with a label(str) for each parameter of the samples.</dd>
+<dt><strong><code>figsize</code></strong> :&ensp;<code>touple</code>, optional</dt>
+<dd>A touple of integers with the size of the figure. The default is
+None(uses pyplot default).</dd>
+<dt><strong><code>dpi</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Figure dots per inch. The default is 100.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
+    &#34;&#34;&#34;
+    Plot the autocorrelation function for each parameter of a given sample.
+
+    Plot the autocorrelation function for each parameter of a given sample. The
+    function is computed with `emcee.autocorr.function_1d`. It is used to asses
+    the convergence of an MCMC chain.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    labels_list : list
+        list with a label(str) for each parameter of the samples.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    &#34;&#34;&#34;
+    dim, clen = len(labels_list), len(flat_samples)
+    step_slice = clen // 100
+    aux_dom = range(0, clen, step_slice)
+    aux_fl = flat_samples[::step_slice]
+    autocfs = np.array([function_1d(aux_fl[:, _]) for _ in range(dim)])
+    fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
+    plt.suptitle(&#34;autocorrelation functions&#34;)
+    for i in range(dim):
+        ax = axes[i]
+        ax.stem(aux_dom, autocfs[i, :], markerfmt=&#34;&#34;)
+        ax.set_ylabel(labels_list[i])
+        ax.yaxis.set_label_coords(-0.1, 0.5)
+
+    axes[-1].set_xlabel(&#34;sample number&#34;)
+    plt.show()</code></pre>
+</details>
+</dd>
+<dt id="quickemcee.utils.cornerplots"><code class="name flex">
+<span>def <span class="ident">cornerplots</span></span>(<span>flat_samples, labels_list)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Make cornerplots for a given sample.</p>
+<p>Cornerplots give the 1D histogram for each parameter, and a 2D histogram
+for each pair of parameters, using the posterior distribution for each
+parameter. Used to display the main results and analyze correlations.</p>
+<p>The middle red line on each PDF marks the median, which is also the central
+value reported above the plot. The dashed grey lines mark the 16/84 and
+84/16 quantiles, which indicate the SD in a normal distribution.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>flat_samples</code></strong> :&ensp;<code>array</code></dt>
+<dd>flattened array of samples.</dd>
+<dt><strong><code>labels_list</code></strong> :&ensp;<code>list</code></dt>
+<dd>list with a string for each parameter.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cornerplots(flat_samples, labels_list):
+    &#34;&#34;&#34;
+    Make cornerplots for a given sample.
+
+    Cornerplots give the 1D histogram for each parameter, and a 2D histogram
+    for each pair of parameters, using the posterior distribution for each
+    parameter. Used to display the main results and analyze correlations.
+
+    The middle red line on each PDF marks the median, which is also the central
+    value reported above the plot. The dashed grey lines mark the 16/84 and
+    84/16 quantiles, which indicate the SD in a normal distribution.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    labels_list : list
+        list with a string for each parameter.
+    &#34;&#34;&#34;
+    dim = len(labels_list)
+    sample_medians = [np.median(flat_samples[:, _]) for _ in range(dim)]
+
+    corner.corner(
+        flat_samples,
+        labels=labels_list,
+        quantiles=(0.16, 0.84),
+        show_titles=True,
+        title_fmt=&#34;.3g&#34;,
+        truths=sample_medians,
+        truth_color=&#34;tab:red&#34;,
+    )
+    plt.show()</code></pre>
+</details>
+</dd>
+<dt id="quickemcee.utils.mode"><code class="name flex">
+<span>def <span class="ident">mode</span></span>(<span>data, xmin=None, xmax=None, bw=None, xr_fr=0.1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the mode of a 1D array of numerical values.</p>
+<p>Compute the mode of an array of values using a kernel density estimation
+method. The KDE method used is <code>scipy.stats.gaussian_kde</code>.</p>
+<p>In multimodal distributions it should return the mode of the highest peak
+within the cutoff values.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array containing the values.</dd>
+<dt><strong><code>xmin</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Lower bound for cutting off the values. The default is None (uses the
+minimum of all values).</dd>
+<dt><strong><code>xmax</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Upper bound for cutting off the values. The default is None (uses the
+maximum of all values).</dd>
+<dt><strong><code>bw</code></strong> :&ensp;<code>str, scalar</code> or <code>callable</code>, optional</dt>
+<dd>The method used to calculate the estimator bandwidth when calling
+<code>scipy.stats.gaussian_kde</code>. The default is None (uses the default
+method). See <code>scipy</code> docs for more info.</dd>
+<dt><strong><code>xr_fr</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Parameter used to define the KDE grid. The default is .1.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>Value of the mode.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mode(data, xmin=None, xmax=None, bw=None, xr_fr=.1):
+    &#34;&#34;&#34;
+    Compute the mode of a 1D array of numerical values.
+
+    Compute the mode of an array of values using a kernel density estimation
+    method. The KDE method used is `scipy.stats.gaussian_kde`.
+
+    In multimodal distributions it should return the mode of the highest peak
+    within the cutoff values.
+
+    Parameters
+    ----------
+    data : array
+        Array containing the values.
+    xmin : float, optional
+        Lower bound for cutting off the values. The default is None (uses the
+        minimum of all values).
+    xmax : float, optional
+        Upper bound for cutting off the values. The default is None (uses the
+        maximum of all values).
+    bw : str, scalar or callable, optional
+        The method used to calculate the estimator bandwidth when calling
+        `scipy.stats.gaussian_kde`. The default is None (uses the default
+        method). See `scipy` docs for more info.
+    xr_fr : float, optional
+        Parameter used to define the KDE grid. The default is .1.
+
+    Returns
+    -------
+    float
+        Value of the mode.
+    &#34;&#34;&#34;
+    if xmin is None:
+        xmin = np.min(data)
+    if xmax is None:
+        xmax = np.max(data)
+    # Define KDE limits.
+    x_rang = xr_fr * (xmax - xmin)
+    kde_x = np.mgrid[xmin - x_rang:xmax + x_rang:1000j]
+    try:
+        kernel_cl = gaussian_kde(data, bw_method=bw)
+        kde = np.reshape(kernel_cl(kde_x).T, kde_x.shape)
+    except np.linalg.LinAlgError:
+        kde = np.array([])
+
+    return kde_x[np.argmax(kde)]</code></pre>
+</details>
+</dd>
+<dt id="quickemcee.utils.resultplot"><code class="name flex">
+<span>def <span class="ident">resultplot</span></span>(<span>flat_samples, y_data, x_data, predf, plotmean=False, plotmedian=False, plotmode=False, plotsamples=0, figsize=None, dpi=100, dotsize=None, linewidth=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot different simulated results and the data.</p>
+<p>Makes a scatter plot for the data, and makes extra plots on top of it to
+compare the results with the data.</p>
+<p>It's possible to plot simulations of the results with the means and the
+modes of the results, and to make shaded plots of simulations using samples
+from the chain, showing the most likely results as more shaded areas.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>flat_samples</code></strong> :&ensp;<code>array</code></dt>
+<dd>flattened array of samples.</dd>
+<dt><strong><code>y_data</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array with the y target data used to fit the model.</dd>
+<dt><strong><code>x_data</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array with the x values corresponding to the y_data values.</dd>
+<dt><strong><code>predf</code></strong> :&ensp;<code>callable</code></dt>
+<dd>The prediction function used in sampling. Should take a 1D array of
+length ndim and return an array of the same shape as y_data.</dd>
+<dt><strong><code>plotmean</code></strong> :&ensp;<code>boolean</code>, optional</dt>
+<dd>Plots the predicted results using the mean of the samples. The default
+is False.</dd>
+<dt><strong><code>plotmedian</code></strong> :&ensp;<code>boolean</code>, optional</dt>
+<dd>Plots the predicted results using the median(50/50 quantile) of the
+samples. The default is False.</dd>
+<dt><strong><code>plotmode</code></strong> :&ensp;<code>boolean</code>, optional</dt>
+<dd>Plots the predicted results using the mode(most likely value) of the
+samples. The default is False.</dd>
+<dt><strong><code>plotsamples</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of samples to draw for making the shaded plots. The default is
+0.</dd>
+<dt><strong><code>figsize</code></strong> :&ensp;<code>touple</code>, optional</dt>
+<dd>A touple of integers with the size of the figure. The default is
+None(uses pyplot default).</dd>
+<dt><strong><code>dpi</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Figure dots per inch. The default is 100.</dd>
+<dt><strong><code>dotsize</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Marker size for scatter plots. The default is None(uses pyplot
+default).</dd>
+<dt><strong><code>linewidth</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Line width for line plots. The default is None(uses pyplot default).</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
+               plotmedian=False, plotmode=False, plotsamples=0,
+               figsize=None, dpi=100, dotsize=None, linewidth=None):
+    &#34;&#34;&#34;
+    Plot different simulated results and the data.
+
+    Makes a scatter plot for the data, and makes extra plots on top of it to
+    compare the results with the data.
+
+    It&#39;s possible to plot simulations of the results with the means and the
+    modes of the results, and to make shaded plots of simulations using samples
+    from the chain, showing the most likely results as more shaded areas.
+
+    Parameters
+    ----------
+    flat_samples : array
+        flattened array of samples.
+    y_data : array
+        Array with the y target data used to fit the model.
+    x_data : array
+        Array with the x values corresponding to the y_data values.
+    predf : callable
+        The prediction function used in sampling. Should take a 1D array of
+        length ndim and return an array of the same shape as y_data.
+    plotmean : boolean, optional
+        Plots the predicted results using the mean of the samples. The default
+        is False.
+    plotmedian : boolean, optional
+        Plots the predicted results using the median(50/50 quantile) of the
+        samples. The default is False.
+    plotmode : boolean, optional
+        Plots the predicted results using the mode(most likely value) of the
+        samples. The default is False.
+    plotsamples : int, optional
+        Number of samples to draw for making the shaded plots. The default is
+        0.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    dotsize : float, optional
+        Marker size for scatter plots. The default is None(uses pyplot
+        default).
+    linewidth : float, optional
+        Line width for line plots. The default is None(uses pyplot default).
+    &#34;&#34;&#34;
+    ndim, ndata = len(flat_samples[0]), len(y_data)
+    x_aux = np.linspace(x_data.min(), x_data.max(), ndata)
+    plt.figure(figsize=figsize, dpi=dpi)
+
+    if linewidth is None or not plotsamples:
+        shaded_lw = None
+    elif plotsamples:
+        try:
+            shaded_lw = 0.7 * linewidth
+        except ValueError:
+            shaded_lw = None
+    else:
+        shaded_lw = None
+
+    if plotsamples:
+        permutation = np.random.permutation(plotsamples)
+        auxsamples = [flat_samples[i] for i in permutation]
+        for sample in auxsamples:
+            plt.plot(x_aux, predf(sample),
+                     lw=shaded_lw, c=&#39;black&#39;, alpha=0.1)
+
+    plt.scatter(x_data, y_data, s=dotsize, label=&#39;data&#39;)
+
+    if plotmean:
+        means = np.array([np.mean(flat_samples[:, i]) for i in range(ndim)])
+        plt.plot(x_aux, predf(means), lw=linewidth, c=&#39;tab:purple&#39;, label=&#39;mean&#39;)
+
+    if plotmedian:
+        medians = np.array([np.median(flat_samples[:, i])
+                            for i in range(ndim)])
+        plt.plot(x_aux, predf(medians), lw=linewidth,
+                 c=&#39;tab:green&#39;, label=&#39;median&#39;)
+
+    if plotmode:
+        modes = np.array([mode(flat_samples[:, i]) for i in range(ndim)])
+        plt.plot(x_aux, predf(modes), lw=linewidth, c=&#39;tab:orange&#39;,
+                 label=&#39;mode&#39;)
+    plt.legend()
+    plt.show()</code></pre>
+</details>
+</dd>
+<dt id="quickemcee.utils.traceplots"><code class="name flex">
+<span>def <span class="ident">traceplots</span></span>(<span>samples, labels_list, figsize=None, dpi=100)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Make a trace plot for each parameter of a given sample.</p>
+<p>A trace plot shows the evolution of each walker for a parameter during an
+MCMC run. This is used in analyzing the convergence of an MCMC chain, or
+to diagnose problems when a chain is not converging.</p>
+<p>Notice that for this plot the samples array is not given flattened.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>samples</code></strong> :&ensp;<code>array</code></dt>
+<dd>non flattened array of samples.</dd>
+<dt><strong><code>labels_list</code></strong> :&ensp;<code>list</code></dt>
+<dd>list with a string for each parameter.</dd>
+<dt><strong><code>figsize</code></strong> :&ensp;<code>touple</code>, optional</dt>
+<dd>A touple of integers with the size of the figure. The default is
+None(uses pyplot default).</dd>
+<dt><strong><code>dpi</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Figure dots per inch. The default is 100.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def traceplots(samples, labels_list, figsize=None, dpi=100):
+    &#34;&#34;&#34;
+    Make a trace plot for each parameter of a given sample.
+
+    A trace plot shows the evolution of each walker for a parameter during an
+    MCMC run. This is used in analyzing the convergence of an MCMC chain, or
+    to diagnose problems when a chain is not converging.
+
+    Notice that for this plot the samples array is not given flattened.
+
+    Parameters
+    ----------
+    samples : array
+        non flattened array of samples.
+    labels_list : list
+        list with a string for each parameter.
+    figsize : touple, optional
+        A touple of integers with the size of the figure. The default is
+        None(uses pyplot default).
+    dpi : int, optional
+        Figure dots per inch. The default is 100.
+    &#34;&#34;&#34;
+    dim = len(labels_list)
+    fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
+    plt.suptitle(&#34;parameter traces&#34;)
+    for i in range(dim):
+        ax = axes[i]
+        ax.plot(samples[:, :, i], &#34;k&#34;, alpha=0.3)
+        ax.set_xlim(0, len(samples))
+        ax.set_ylabel(labels_list[i])
+        ax.yaxis.set_label_coords(-0.1, 0.5)
+
+    axes[-1].set_xlabel(&#34;step number&#34;)
+    plt.show()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="quickemcee.utils.normal_prior"><code class="flex name class">
+<span>class <span class="ident">normal_prior</span></span>
+<span>(</span><span>x0, sigma)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define normal PDF callable.</p>
+<p>Define a probability distribution object. An instance of this class can be
+called to compute the probability density of a float, and it only takes the
+float as argument.</p>
+<p>The normal (aka Gaussian) prior distribution is defined as</p>
+<p><span><span class="MathJax_Preview">p(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp{
+\left\{ -\frac{1}{2} \left( \frac{x-x_0}{\sigma} \right)^2
+\right\}
+}</span><script type="math/tex; mode=display">p(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp{
+\left\{ -\frac{1}{2} \left( \frac{x-x_0}{\sigma} \right)^2
+\right\}
+}</script></span></p>
+<p>and is given normalized.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>x0</code></strong> :&ensp;<code>float</code></dt>
+<dd>central value of the normal distribution.</dd>
+<dt><strong><code>sigma</code></strong> :&ensp;<code>float</code></dt>
+<dd>standard deviation of the normal distribution.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class normal_prior:
+    r&#34;&#34;&#34;
+    Define normal PDF callable.
+
+    Define a probability distribution object. An instance of this class can be
+    called to compute the probability density of a float, and it only takes the
+    float as argument.
+
+    The normal (aka Gaussian) prior distribution is defined as
+
+    $$p(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp{
+        \left\{ -\frac{1}{2} \left( \frac{x-x_0}{\sigma} \right)^2
+            \right\}
+        }$$
+
+    and is given normalized.
+    &#34;&#34;&#34;
+
+    def __init__(self, x0, sigma):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        x0 : float
+            central value of the normal distribution.
+        sigma : float
+            standard deviation of the normal distribution.
+        &#34;&#34;&#34;
+        self.x0 = x0
+        self.sigma = sigma
+
+    def __call__(self, x):
+        &#34;&#34;&#34;
+        Compute the probability of a real valued variable.
+
+        Parameters
+        ----------
+        x : float
+
+        Returns
+        -------
+        float
+            p(x) as per the mathematical definition of the PDF.
+        &#34;&#34;&#34;
+        p = (np.exp(-0.5 * ((x - self.x0) / self.sigma) ** 2)) / sqrt(
+            2 * np.pi) / self.sigma
+        return p</code></pre>
+</details>
+</dd>
+<dt id="quickemcee.utils.uniform_prior"><code class="flex name class">
+<span>class <span class="ident">uniform_prior</span></span>
+<span>(</span><span>xmin, xmax)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define uniform PDF callable.</p>
+<p>Defines a probability distribution object. An instance of this class can be
+called to compute the probability density of a float, and it only takes the
+float as argument.</p>
+<p>The uniform prior distribution is defined as</p>
+<p><span><span class="MathJax_Preview">p(x) = \frac{1}{x_{max}-x_{min}} \quad\text{if}\quad x_{min}&lt;x&lt;x_{max} \\
+0 \qquad\qquad\text{otherwise}</span><script type="math/tex; mode=display">p(x) = \frac{1}{x_{max}-x_{min}} \quad\text{if}\quad x_{min}<x<x_{max} \\
+0 \qquad\qquad\text{otherwise}</script></span></p>
+<p>and is given normalized.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>xmin</code></strong> :&ensp;<code>float</code></dt>
+<dd>lower bound of the uniform distribution.</dd>
+<dt><strong><code>xmax</code></strong> :&ensp;<code>float</code></dt>
+<dd>upper bound of the uniform distribution.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code>f = quickemcee.utils.uniform_prior(0,4)
+f(3.0)
+&gt;&gt;&gt; 0.25
+f(-1.0)
+&gt;&gt;&gt; 0.0
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class uniform_prior:
+    r&#34;&#34;&#34;
+    Define uniform PDF callable.
+
+    Defines a probability distribution object. An instance of this class can be
+    called to compute the probability density of a float, and it only takes the
+    float as argument.
+
+    The uniform prior distribution is defined as
+
+    $$p(x) = \frac{1}{x_{max}-x_{min}} \quad\text{if}\quad x_{min}&lt;x&lt;x_{max} \\
+        0 \qquad\qquad\text{otherwise}$$
+
+    and is given normalized.
+    &#34;&#34;&#34;
+
+    def __init__(self, xmin, xmax):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        xmin : float
+            lower bound of the uniform distribution.
+        xmax : float
+            upper bound of the uniform distribution.
+
+        Examples
+        --------
+            f = quickemcee.utils.uniform_prior(0,4)
+            f(3.0)
+            &gt;&gt;&gt; 0.25
+            f(-1.0)
+            &gt;&gt;&gt; 0.0
+        &#34;&#34;&#34;
+        self.xmin = xmin
+        self.xmax = xmax
+
+    def __call__(self, x):
+        &#34;&#34;&#34;
+        Compute the probability of a real valued variable.
+
+        Parameters
+        ----------
+        x : float
+
+        Returns
+        -------
+        float
+            p(x) as per the mathematical definition of the PDF.
+        &#34;&#34;&#34;
+        p = 1 if x &lt; self.xmax and x &gt; self.xmin else 0
+        return p / (self.xmax - self.xmin)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="quickemcee" href="index.html">quickemcee</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="quickemcee.utils.autocplots" href="#quickemcee.utils.autocplots">autocplots</a></code></li>
+<li><code><a title="quickemcee.utils.cornerplots" href="#quickemcee.utils.cornerplots">cornerplots</a></code></li>
+<li><code><a title="quickemcee.utils.mode" href="#quickemcee.utils.mode">mode</a></code></li>
+<li><code><a title="quickemcee.utils.resultplot" href="#quickemcee.utils.resultplot">resultplot</a></code></li>
+<li><code><a title="quickemcee.utils.traceplots" href="#quickemcee.utils.traceplots">traceplots</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="quickemcee.utils.normal_prior" href="#quickemcee.utils.normal_prior">normal_prior</a></code></h4>
+</li>
+<li>
+<h4><code><a title="quickemcee.utils.uniform_prior" href="#quickemcee.utils.uniform_prior">uniform_prior</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
