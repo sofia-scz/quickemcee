@@ -5,8 +5,8 @@ import emcee
 from multiprocessing import Pool
 
 
-class Model:
-    """Build a model object."""
+class PFModel:
+    """Build a model object from the prediction function and the data."""
 
     def __init__(self, ndim, predict, priors, y_data, y_sigma):
         """
@@ -196,6 +196,98 @@ class Model:
                 sampler = emcee.EnsembleSampler(nwalkers,
                                                 ndim,
                                                 self._log_probability,
+                                                moves=moves,
+                                                pool=pool)
+                print("")
+                print("Running burn-in...")
+                p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+                sampler.reset()
+
+                print("")
+                print("Running production...")
+                pos, prob, state = sampler.run_mcmc(p0, main_iter,
+                                                    progress=True)
+                pool.close()
+            # outside with-as
+            return sampler
+
+
+class LPModel:
+    """Build a model object from the log probability function."""
+
+    def __init__(self, ndim, log_probability):
+        """
+        Parameters
+        ----------
+        ndim : int
+            Number of parameters to fit in the model.
+        log_probability : callable
+            takes as argument a 1D array of length ndim and returns the
+            logarithmic probability function.
+
+        """
+        self.log_probability, self.ndim = (log_probability, ndim)
+
+    def run_chain(self, nwalkers, burn_iter, main_iter,
+                  init_x=None, moves=None, workers=1):
+        """
+        Instance an `emcee` Ensemble Sambler and run an MCMC chain with it.
+
+        Parameters
+        ----------
+        nwalkers : int
+            number of walkers.
+        burn_iter : int
+            the number of steps that the chain will do during the burn in
+            phase. The samples produced during burn in phase are discarded.
+        main_iter : int
+            the number of steps that the chain will do during the production
+            phase. The samples produced during production phase are saved in
+            the sampler and can be extracted for later analysis.
+        init_x : array, optional
+            1D array of length ndim with an initial guess for the parameters
+            values. When set as None uses all zeroes. The default is None.
+        moves : emcee moves object, optional
+            `emcee` moves object. The default is None.
+        workers : int, optional
+            Parallelize the computing by setting up a pool of workers of size
+            workers. The default is 1.
+
+        Returns
+        -------
+        sampler : emcee Ensemble Sampler object
+            The instanced `emcee` sampler for which the chain is run.
+
+        """
+        ndim = self.ndim
+
+        if init_x is None:
+            init_x = np.zeros(ndim)
+
+        p0 = [init_x + 1e-7 * np.random.randn(ndim)
+              for i in range(nwalkers)]
+
+        if workers == 1:
+            sampler = emcee.EnsembleSampler(nwalkers,
+                                            ndim,
+                                            self.log_probability,
+                                            moves=moves)
+            print("")
+            print("Running burn-in...")
+            p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+            sampler.reset()
+
+            print("")
+            print("Running production...")
+            pos, prob, state = sampler.run_mcmc(p0, main_iter, progress=True)
+
+            return sampler
+
+        elif workers > 1:
+            with Pool(processes=workers) as pool:
+                sampler = emcee.EnsembleSampler(nwalkers,
+                                                ndim,
+                                                self.log_probability,
                                                 moves=moves,
                                                 pool=pool)
                 print("")
