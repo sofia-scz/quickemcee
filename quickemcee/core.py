@@ -137,7 +137,8 @@ class PFModel:
         return -self._log_likelihood(coords)
 
     def run_chain(self, nwalkers, burn_iter, main_iter,
-                  init_x=None, moves=None, workers=1):
+                  init_x=None, moves=None, workers=1,
+                  display=False):
         """
         Instance an `emcee` Ensemble Sambler and run an MCMC chain with it.
 
@@ -182,12 +183,13 @@ class PFModel:
                                             moves=moves)
             print("")
             print("Running burn-in...")
-            p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+            p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=display)
             sampler.reset()
 
             print("")
             print("Running production...")
-            pos, prob, state = sampler.run_mcmc(p0, main_iter, progress=True)
+            pos, prob, state = sampler.run_mcmc(p0, main_iter,
+                                                progress=display)
 
             return sampler
 
@@ -200,13 +202,13 @@ class PFModel:
                                                 pool=pool)
                 print("")
                 print("Running burn-in...")
-                p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+                p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=display)
                 sampler.reset()
 
                 print("")
                 print("Running production...")
                 pos, prob, state = sampler.run_mcmc(p0, main_iter,
-                                                    progress=True)
+                                                    progress=display)
                 pool.close()
             # outside with-as
             return sampler
@@ -229,7 +231,8 @@ class LPModel:
         self.log_probability, self.ndim = (log_probability, ndim)
 
     def run_chain(self, nwalkers, burn_iter, main_iter,
-                  init_x=None, moves=None, workers=1):
+                  init_x=None, moves=None, workers=1,
+                  display=False):
         """
         Instance an `emcee` Ensemble Sambler and run an MCMC chain with it.
 
@@ -274,12 +277,13 @@ class LPModel:
                                             moves=moves)
             print("")
             print("Running burn-in...")
-            p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+            p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=display)
             sampler.reset()
 
             print("")
             print("Running production...")
-            pos, prob, state = sampler.run_mcmc(p0, main_iter, progress=True)
+            pos, prob, state = sampler.run_mcmc(
+                p0, main_iter, progress=display)
 
             return sampler
 
@@ -292,13 +296,13 @@ class LPModel:
                                                 pool=pool)
                 print("")
                 print("Running burn-in...")
-                p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=True)
+                p0, _, _ = sampler.run_mcmc(p0, burn_iter, progress=display)
                 sampler.reset()
 
                 print("")
                 print("Running production...")
                 pos, prob, state = sampler.run_mcmc(p0, main_iter,
-                                                    progress=True)
+                                                    progress=display)
                 pool.close()
             # outside with-as
             return sampler
