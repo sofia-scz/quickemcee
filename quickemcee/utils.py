@@ -165,7 +165,7 @@ class normal_prior:
 #                                   PLOTTING
 
 
-def cornerplots(flat_samples, labels_list):
+def cornerplots(flat_samples, labels_list, show=False, filesave=None):
     """
     Make cornerplots for a given sample.
 
@@ -183,6 +183,12 @@ def cornerplots(flat_samples, labels_list):
         flattened array of samples.
     labels_list : list
         list with a string for each parameter.
+    show : boolean, optional
+        Set True for running pyplot show() after making the figure. The default
+        is False.
+    filesave : string, optional
+        Save the figure with name filesave. The default is None.
+
     """
     dim = len(labels_list)
     sample_medians = [np.median(flat_samples[:, _]) for _ in range(dim)]
@@ -196,10 +202,15 @@ def cornerplots(flat_samples, labels_list):
         truths=sample_medians,
         truth_color="tab:red",
     )
-    plt.show()
+
+    if filesave is not None:
+        plt.savefig(filesave)
+    if show:
+        plt.show()
 
 
-def traceplots(samples, labels_list, figsize=None, dpi=100):
+def traceplots(samples, labels_list, figsize=None, dpi=100,
+               show=False, filesave=None):
     """
     Make a trace plot for each parameter of a given sample.
 
@@ -220,6 +231,12 @@ def traceplots(samples, labels_list, figsize=None, dpi=100):
         None(uses pyplot default).
     dpi : int, optional
         Figure dots per inch. The default is 100.
+    show : boolean, optional
+        Set True for running pyplot show() after making the figure. The default
+        is False.
+    filesave : string, optional
+        Save the figure with name filesave. The default is None.
+
     """
     dim = len(labels_list)
     fig, axes = plt.subplots(dim, figsize=figsize, dpi=dpi, sharex=True)
@@ -232,10 +249,15 @@ def traceplots(samples, labels_list, figsize=None, dpi=100):
         ax.yaxis.set_label_coords(-0.1, 0.5)
 
     axes[-1].set_xlabel("step number")
-    plt.show()
+
+    if filesave is not None:
+        plt.savefig(filesave)
+    if show:
+        plt.show()
 
 
-def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
+def autocplots(flat_samples, labels_list, figsize=None, dpi=100,
+               show=False, filesave=None):
     """
     Plot the autocorrelation function for each parameter of a given sample.
 
@@ -254,6 +276,12 @@ def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
         None(uses pyplot default).
     dpi : int, optional
         Figure dots per inch. The default is 100.
+    show : boolean, optional
+        Set True for running pyplot show() after making the figure. The default
+        is False.
+    filesave : string, optional
+        Save the figure with name filesave. The default is None.
+
     """
     dim, clen = len(labels_list), len(flat_samples)
     step_slice = clen // 100
@@ -267,14 +295,18 @@ def autocplots(flat_samples, labels_list, figsize=None, dpi=100):
         ax.stem(aux_dom, autocfs[i, :], markerfmt="")
         ax.set_ylabel(labels_list[i])
         ax.yaxis.set_label_coords(-0.1, 0.5)
-
     axes[-1].set_xlabel("sample number")
-    plt.show()
+
+    if filesave is not None:
+        plt.savefig(filesave)
+    if show:
+        plt.show()
 
 
 def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
                plotmedian=False, plotmode=False, plotsamples=0,
-               figsize=None, dpi=100, dotsize=None, linewidth=None):
+               figsize=None, dpi=100, dotsize=None, linewidth=None,
+               show=False, filesave=None):
     """
     Plot different simulated results and the data.
 
@@ -318,10 +350,16 @@ def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
         default).
     linewidth : float, optional
         Line width for line plots. The default is None(uses pyplot default).
+    show : boolean, optional
+        Set True for running pyplot show() after making the figure. The default
+        is False.
+    filesave : string, optional
+        Save the figure with name filesave. The default is None.
+
     """
     ndim, ndata = len(flat_samples[0]), len(y_data)
     x_aux = np.linspace(x_data.min(), x_data.max(), ndata)
-    plt.figure(figsize=figsize, dpi=dpi)
+    plt.figure(figsize=figsize, dpi=dpi,)
 
     if linewidth is None or not plotsamples:
         shaded_lw = None
@@ -344,7 +382,8 @@ def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
 
     if plotmean:
         means = np.array([np.mean(flat_samples[:, i]) for i in range(ndim)])
-        plt.plot(x_aux, predf(means), lw=linewidth, c='tab:purple', label='mean')
+        plt.plot(x_aux, predf(means), lw=linewidth,
+                 c='tab:purple', label='mean')
 
     if plotmedian:
         medians = np.array([np.median(flat_samples[:, i])
@@ -357,4 +396,8 @@ def resultplot(flat_samples, y_data, x_data, predf, plotmean=False,
         plt.plot(x_aux, predf(modes), lw=linewidth, c='tab:orange',
                  label='mode')
     plt.legend()
-    plt.show()
+
+    if filesave is not None:
+        plt.savefig(filesave)
+    if show:
+        plt.show()
